@@ -4,7 +4,7 @@ Repository for [DELL: Generating Reactions and Explanations for LLM-Based Misinf
 # Coming Soon
 
 
-#Updating
+# Updating
 
 ### 20240519
 - Our paper has been accepted to the ACL Findings.
