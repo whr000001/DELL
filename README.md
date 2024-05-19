@@ -1,7 +1,7 @@
 # DELL Repository
 Repository for ACL2024 Findings: [DELL: Generating Reactions and Explanations for LLM-Based Misinformation Detection](https://arxiv.org/abs/2402.10426)
 
-All resources are available on [Google Drive](https://drive.google.com/drive/folders/1nPo6x3AY7Kt1Nb9DUUvBAhpMwad3zhvq?usp=sharing)
+All resources will be available on [Google Drive](https://drive.google.com/drive/folders/1nPo6x3AY7Kt1Nb9DUUvBAhpMwad3zhvq?usp=sharing)
 
 We plan to upload the complete codes and related resources before June.
 
