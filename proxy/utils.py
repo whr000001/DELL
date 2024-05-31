@@ -20,7 +20,7 @@ def get_reply(content):
     input_length = len(inputs['input_ids'][0])
     generated_ids = model.generate(**inputs,
                                    max_new_tokens=1000,
-                                   temperature=0,
+                                   temperature=0.2,
                                    do_sample=True,
                                    pad_token_id=tokenizer.eos_token_id)
     decoded = tokenizer.decode(generated_ids[0][input_length:], skip_special_tokens=True)
