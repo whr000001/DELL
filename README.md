@@ -95,6 +95,28 @@ We also provide the final predictions we generated in our experiments in the fol
 # Citation
 If you find our work interesting/helpful, please consider citing DELL:
 ```
+@inproceedings{wan-etal-2024-dell,
+    title = "{DELL}: Generating Reactions and Explanations for {LLM}-Based Misinformation Detection",
+    author = "Wan, Herun  and
+      Feng, Shangbin  and
+      Tan, Zhaoxuan  and
+      Wang, Heng  and
+      Tsvetkov, Yulia  and
+      Luo, Minnan",
+    editor = "Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek",
+    booktitle = "Findings of the Association for Computational Linguistics ACL 2024",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand and virtual meeting",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.findings-acl.155",
+    pages = "2637--2667",
+    abstract = "Large language models are limited by challenges in factuality and hallucinations to be directly employed off-the-shelf for judging the veracity of news articles, where factual accuracy is paramount. In this work, we propose DELL that identifies three key stages in misinformation detection where LLMs could be incorporated as part of the pipeline: 1) LLMs could generate news reactions to represent diverse perspectives and simulate user-news interaction networks; 2) LLMs could generate explanations for proxy tasks (e.g., sentiment, stance) to enrich the contexts of news articles and produce experts specializing in various aspects of news understanding; 3) LLMs could merge task-specific experts and provide an overall prediction by incorporating the predictions and confidence scores of varying experts. Extensive experiments on seven datasets with three LLMs demonstrate that DELL outperforms state-of-the-art baselines by up to 16.8{\%} in macro f1-score. Further analysis reveals that the generated reactions and explanations are greatly helpful in misinformation detection, while our proposed LLM-guided expert merging helps produce better-calibrated predictions.",
+}
+```
+```
 @article{wan2024dell,
   title={DELL: Generating Reactions and Explanations for LLM-Based Misinformation Detection},
   author={Wan, Herun and Feng, Shangbin and Tan, Zhaoxuan and Wang, Heng and Tsvetkov, Yulia and Luo, Minnan},
