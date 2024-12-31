@@ -10,11 +10,10 @@ import nltk
 
 
 #  load LLMs, we employ mistral-7b as LLM, from https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1
-os.environ['CUDA_VISIBLE_DEVICES'] = '0, 1, 2, 3'
-model = AutoModelForCausalLM.from_pretrained("mistralai/Mistral-7B-Instruct-v0.1",
-                                             # local_files_only=True,
+os.environ['CUDA_VISIBLE_DEVICES'] = '1, 5, 7'
+model = AutoModelForCausalLM.from_pretrained("/data01/whr/resources/Mistral-7B-Instruct-v0.3",
                                              device_map='auto')
-tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.1", local_files_only=True)
+tokenizer = AutoTokenizer.from_pretrained("/data01/whr/resources/Mistral-7B-Instruct-v0.3")
 
 
 def construct_length(text):
@@ -29,16 +28,22 @@ def construct_length(text):
 
 
 @torch.no_grad()
-def get_reply(content):
+def get_reply(content, temperature=0.3):
     sentences = [content]
     inputs = tokenizer(sentences, return_tensors="pt")
     inputs = inputs.to(model.device)
     input_length = len(inputs['input_ids'][0])
-    generated_ids = model.generate(**inputs,
-                                   max_new_tokens=200,
-                                   temperature=0.6,
-                                   do_sample=True,
-                                   pad_token_id=tokenizer.eos_token_id)
+    if temperature == 0:
+        generated_ids = model.generate(**inputs,
+                                       max_new_tokens=200,
+                                       do_sample=False,
+                                       pad_token_id=tokenizer.eos_token_id)
+    else:
+        generated_ids = model.generate(**inputs,
+                                       max_new_tokens=200,
+                                       temperature=temperature,
+                                       do_sample=True,
+                                       pad_token_id=tokenizer.eos_token_id)
     decoded = tokenizer.decode(generated_ids[0][input_length:], skip_special_tokens=True)
     return decoded
 
@@ -210,6 +215,7 @@ def generate(news):
 
 
 def main():
+    random.seed(20250101)
     dataset_names = {
         'TASK1': ['LLM-mis', 'Pheme'],
         'TASK2': ['MFC', 'SemEval-23F'],
@@ -218,20 +224,19 @@ def main():
     for task in dataset_names:
         for dataset in dataset_names[task]:
             dataset_name = dataset.replace('.json', '')
+            if not os.path.exists('../data/networks'):
+                os.mkdir('../data/networks')
             save_dir = f'../data/networks/{task}_{dataset}'
             if not os.path.exists(save_dir):
                 os.mkdir(save_dir)
             data = json.load(open(f'../data/datasets/{task}/{dataset}.json', encoding='utf-8'))
             #  load datasets
-            for index, item in enumerate(tqdm(data, desc='TASK{}, {}'.format(task, dataset_name), leave=False)):
+            for index, item in enumerate(tqdm(data, desc='{}, {}'.format(task, dataset_name), leave=False)):
                 save_path = f'{save_dir}/{index}.json'
                 if os.path.exists(save_path):
                     continue
-                #  a way to limit the length of news articles, optional
-                if len(item[0]) >= 640:
-                    in_text = construct_length(item[0])
-                else:
-                    in_text = item[0]
+                #  a way to limit the length of news articles, optiona
+                in_text = construct_length(item[0])
                 #  obtain the user-news network. If you want to generate user-news networks on other datasets,
                 #  you can use the generate function.
                 out = generate(in_text)  # the input is news article
