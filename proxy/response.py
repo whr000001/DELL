@@ -28,6 +28,8 @@ def get_one_response(data):
 
 
 def main():
+    if not os.path.exists('../data/proxy/response/'):
+        os.mkdir('../data/proxy/response/')
     for task in dataset_names:
         for dataset in dataset_names[task]:
             network_dir = f'../data/networks/{task}_{dataset}'

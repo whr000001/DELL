@@ -19,6 +19,8 @@ def main():
     for task in dataset_names:
         for dataset in dataset_names[task]:
             data = json.load(open(f'../data/proxy/entity/{task}_{dataset}.json'))
+            if not os.path.exists('../data/proxy/entity_from_wiki'):
+                os.mkdir('../data/proxy/entity_from_wiki')
             save_dir = f'../data/proxy/entity_from_wiki/{task}_{dataset}.json'
             if os.path.exists(save_dir):
                 out = json.load(open(save_dir))

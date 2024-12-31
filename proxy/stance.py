@@ -28,6 +28,8 @@ def get_one_stance(data):
 
 
 def main():
+    if not os.path.exists('../data/proxy/stance/'):
+        os.mkdir('../data/proxy/stance/')
     for task in dataset_names:
         for dataset in dataset_names[task]:
             network_dir = f'../data/networks/{task}_{dataset}'
