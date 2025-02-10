@@ -95,7 +95,7 @@ python [vallina/confidence/selective].py
 We also provide the final predictions we generated in our experiments in the folder `ensemble/results`.
 
 # Useful Links
-- A lot of thanks to [@Daniel](https://github.com/gszswork), who provides a improved [version](https://github.com/gszswork/DELL).
+- A lot of thanks to [@Daniel](https://github.com/gszswork), who provides an improved [version](https://github.com/gszswork/DELL).
 
 
 # Citation
